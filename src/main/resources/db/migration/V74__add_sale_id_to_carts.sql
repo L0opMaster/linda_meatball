@@ -1,0 +1,2 @@
+ALTER TABLE carts ADD COLUMN sale_id BIGINT NULL;
+ALTER TABLE carts ADD CONSTRAINT fk_carts_sale FOREIGN KEY (sale_id) REFERENCES sales(id);
