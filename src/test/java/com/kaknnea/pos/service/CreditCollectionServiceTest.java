@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -62,6 +63,7 @@ class CreditCollectionServiceTest {
     @BeforeEach
     void setUp() {
         customer = new Customer();
+        customer.setId(1L);
         customer.setCustomerCode("CUST-CREDIT-T01");
         customer.setType("INDIVIDUAL");
         customer.setNameEn("Credit Test");
@@ -69,7 +71,7 @@ class CreditCollectionServiceTest {
         customer.setPhone("099123456");
         customer.setCreditLimit(new BigDecimal("500.00"));
         customer.setCreditBalance(new BigDecimal("60.00"));
-        customer = customerRepository.save(customer);
+        lenient().when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
     }
 
     @Test
