@@ -24,7 +24,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          jave-version: '17'
+          java-version: '17'
           distribution: 'corretto'
 
       - name: Cache Maven dependencies
@@ -88,7 +88,7 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.APP_NAME }}:latest
             ${{ secrets.DOCKER_USERNAME }}/${{ steps.extract_version.outputs.VERSION }}:latest
           cache-from: type=gha
-          cache-to: type=gha,mode=mas
+          cache-to: type=gha,mode=max
           build-args: |
             PROFILE=dev
             APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
@@ -115,7 +115,7 @@ jobs:
             MY_DB_PASSWORD=${{secrets.MY_DB_PASSWORD}}
             EOF
             
-            rn docker-compose.dev.yml
+            rm docker-compose.dev.yml
             # Download docker-compose.dev.yml if it doesn't exist
             if [! -f docker-compose.dev.yml]; then
              curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -o docker-compose.dev.yml https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/main/docker-compose.dev.yml
