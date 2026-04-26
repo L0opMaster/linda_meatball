@@ -171,7 +171,7 @@ class CartServiceTest {
         when(cartItemRepository.save(any(CartItem.class))).thenReturn(savedItem);
 
         // When
-        CartItem result = cartService.addItemToCart(1L, 1L, 5);
+        CartItem result = cartService.addItemToCart(1L, 1L, 5, product.getPrice());
 
         // Then
         assertNotNull(result);
@@ -188,16 +188,16 @@ class CartServiceTest {
         when(productRepository.findById(999L)).thenReturn(Optional.empty());
 
         // When & Then
-        assertThrows(ApiException.class, () -> cartService.addItemToCart(1L, 999L, 5));
+        assertThrows(ApiException.class, () -> cartService.addItemToCart(1L, 999L, 5, product.getPrice()));
     }
 
     @Test
     void testAddItemToCart_InvalidQuantity() {
         // Given
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, 0));
-        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, -5));
-        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, 10001));
+        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, 0, product.getPrice()));
+        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, -5, product.getPrice()));
+        assertThrows(IllegalArgumentException.class, () -> cartService.addItemToCart(1L, 1L, 10001, product.getPrice()));
     }
 
     @Test
@@ -219,7 +219,7 @@ class CartServiceTest {
         when(cartItemRepository.save(any(CartItem.class))).thenReturn(updatedItem);
 
         // When
-        CartItem result = cartService.addItemToCart(1L, 1L, 5);
+        CartItem result = cartService.addItemToCart(1L, 1L, 5, product.getPrice());
 
         // Then
         assertNotNull(result);
@@ -247,7 +247,7 @@ class CartServiceTest {
         when(cartItemRepository.save(any(CartItem.class))).thenReturn(updatedItem);
 
         // When
-        CartItem result = cartService.updateCartItemQuantity(1L, 1L, 10);
+        CartItem result = cartService.updateCartItemQuantity(1L, 1L, 10, product.getPrice());
 
         // Then
         assertNotNull(result);
@@ -258,7 +258,7 @@ class CartServiceTest {
     @Test
     void testUpdateCartItemQuantity_InvalidQuantity() {
         // Given & When & Then
-        assertThrows(IllegalArgumentException.class, () -> cartService.updateCartItemQuantity(1L, 1L, 0));
+        assertThrows(IllegalArgumentException.class, () -> cartService.updateCartItemQuantity(1L, 1L, 0, product.getPrice()));
     }
 
     // ============ REMOVE ITEM TESTS ============

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-25T13:29:39+0700",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
+    date = "2026-04-25T17:35:21+0700",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.18 (Ubuntu)"
 )
 @Component
 public class CustomerMapperImpl implements CustomerMapper {
@@ -23,22 +23,22 @@ public class CustomerMapperImpl implements CustomerMapper {
 
         customerResponse.setCode( customer.getCode() );
         customerResponse.setTotalSales( customer.getTotalSales() );
-        customerResponse.setAddress( customer.getAddress() );
-        customerResponse.setContactPerson( customer.getContactPerson() );
-        customerResponse.setCreditBalance( customer.getCreditBalance() );
-        customerResponse.setCreditHold( customer.isCreditHold() );
-        customerResponse.setCreditLimit( customer.getCreditLimit() );
-        customerResponse.setDisplayName( customer.getDisplayName() );
-        customerResponse.setEmail( customer.getEmail() );
         customerResponse.setId( customer.getId() );
+        customerResponse.setType( customer.getType() );
+        customerResponse.setStatus( customer.getStatus() );
         customerResponse.setNameEn( customer.getNameEn() );
         customerResponse.setNameKm( customer.getNameKm() );
-        customerResponse.setNotes( customer.getNotes() );
-        customerResponse.setPaymentTerms( customer.getPaymentTerms() );
+        customerResponse.setDisplayName( customer.getDisplayName() );
         customerResponse.setPhone( customer.getPhone() );
-        customerResponse.setStatus( customer.getStatus() );
+        customerResponse.setEmail( customer.getEmail() );
+        customerResponse.setAddress( customer.getAddress() );
+        customerResponse.setNotes( customer.getNotes() );
+        customerResponse.setContactPerson( customer.getContactPerson() );
+        customerResponse.setPaymentTerms( customer.getPaymentTerms() );
         customerResponse.setTaxNumber( customer.getTaxNumber() );
-        customerResponse.setType( customer.getType() );
+        customerResponse.setCreditBalance( customer.getCreditBalance() );
+        customerResponse.setCreditLimit( customer.getCreditLimit() );
+        customerResponse.setCreditHold( customer.isCreditHold() );
 
         return customerResponse;
     }

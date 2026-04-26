@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-backend
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MY_DB_NAME}
+      MYSQL_USER: ${MY_DB_USERNAME}
+      MYSQL_PASSWORD: ${MY_DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: ${DOCKER_USERNAME}/${APP_NAME}:latest
+    container_name: ${APP_NAME}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: mysql-backend          # <- container name of the MySQL service
+      DB_PORT: "3306"
+      DB_NAME: ${MY_DB_NAME}
+      DB_USERNAME: ${MY_DB_USERNAME}
+      DB_PASSWORD: ${MY_DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    name: backend-default

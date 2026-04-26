@@ -1,16 +1,26 @@
-# Dev profile — loaded when SPRING_PROFILES_ACTIVE=dev
-# Overrides production defaults for local development only.
-app:
-  cors:
-    # Allow every origin in dev (wildcard via pattern).
-    # DO NOT copy this to application.yml or production config.
-    allowed-origins: "*"
-  security:
-    # When true every authenticated request is permitted regardless of role.
-    # The JWT filter still runs so you still need a valid token — use this to
-    # skip role/permission checks while building new endpoints locally.
-    permit-all: true
-  dev:
-    # Set to true to skip JWT validation entirely (no token required).
-    # Only useful when testing with curl/Postman without a login step.
-    disable-auth: false
+spring:
+  application:
+    name: backend-spring-boot
+  datasource:
+    url: jdbc:mysql://${DB_URL}:${DB_PORT}/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: 8081
+  address: 0.0.0.0

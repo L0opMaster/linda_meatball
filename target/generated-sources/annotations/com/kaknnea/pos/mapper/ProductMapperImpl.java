@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-25T13:29:39+0700",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
+    date = "2026-04-25T17:35:21+0700",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.18 (Ubuntu)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
@@ -29,24 +29,24 @@ public class ProductMapperImpl implements ProductMapper {
         productResponse.setParentProductId( product.getParentProductId() );
         productResponse.setParentProductNameEn( product.getParentProductNameEn() );
         productResponse.setResolvedPrice( product.getResolvedPrice() );
-        productResponse.setActive( product.isActive() );
-        productResponse.setBarcode( product.getBarcode() );
-        productResponse.setBundleComponents( productBundleComponentListToProductBundleComponentResponseList( product.getBundleComponents() ) );
-        productResponse.setBundleMode( product.getBundleMode() );
-        productResponse.setCost( product.getCost() );
         productResponse.setId( product.getId() );
-        productResponse.setImageUrl( product.getImageUrl() );
-        productResponse.setImages( productImageListToProductImageResponseList( product.getImages() ) );
-        productResponse.setLowStockThreshold( product.getLowStockThreshold() );
+        productResponse.setSku( product.getSku() );
+        productResponse.setBarcode( product.getBarcode() );
         productResponse.setNameEn( product.getNameEn() );
         productResponse.setNameKm( product.getNameKm() );
+        productResponse.setImageUrl( product.getImageUrl() );
+        productResponse.setCost( product.getCost() );
         productResponse.setPrice( product.getPrice() );
-        productResponse.setProductType( product.getProductType() );
-        productResponse.setPurchasable( product.isPurchasable() );
+        productResponse.setActive( product.isActive() );
         productResponse.setSellable( product.isSellable() );
-        productResponse.setSku( product.getSku() );
+        productResponse.setPurchasable( product.isPurchasable() );
         productResponse.setTrackInventory( product.isTrackInventory() );
+        productResponse.setProductType( product.getProductType() );
+        productResponse.setLowStockThreshold( product.getLowStockThreshold() );
         productResponse.setVariantLabel( product.getVariantLabel() );
+        productResponse.setBundleMode( product.getBundleMode() );
+        productResponse.setImages( productImageListToProductImageResponseList( product.getImages() ) );
+        productResponse.setBundleComponents( productBundleComponentListToProductBundleComponentResponseList( product.getBundleComponents() ) );
 
         return productResponse;
     }
@@ -84,6 +84,19 @@ public class ProductMapperImpl implements ProductMapper {
         return productDto;
     }
 
+    protected List<ProductDtos.ProductImageResponse> productImageListToProductImageResponseList(List<ProductImage> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ProductDtos.ProductImageResponse> list1 = new ArrayList<ProductDtos.ProductImageResponse>( list.size() );
+        for ( ProductImage productImage : list ) {
+            list1.add( toImageResponse( productImage ) );
+        }
+
+        return list1;
+    }
+
     protected ProductDtos.ProductBundleComponentResponse productBundleComponentToProductBundleComponentResponse(ProductBundleComponent productBundleComponent) {
         if ( productBundleComponent == null ) {
             return null;
@@ -91,8 +104,8 @@ public class ProductMapperImpl implements ProductMapper {
 
         ProductDtos.ProductBundleComponentResponse productBundleComponentResponse = new ProductDtos.ProductBundleComponentResponse();
 
-        productBundleComponentResponse.setComponentQuantity( productBundleComponent.getComponentQuantity() );
         productBundleComponentResponse.setId( productBundleComponent.getId() );
+        productBundleComponentResponse.setComponentQuantity( productBundleComponent.getComponentQuantity() );
 
         return productBundleComponentResponse;
     }
@@ -105,19 +118,6 @@ public class ProductMapperImpl implements ProductMapper {
         List<ProductDtos.ProductBundleComponentResponse> list1 = new ArrayList<ProductDtos.ProductBundleComponentResponse>( list.size() );
         for ( ProductBundleComponent productBundleComponent : list ) {
             list1.add( productBundleComponentToProductBundleComponentResponse( productBundleComponent ) );
-        }
-
-        return list1;
-    }
-
-    protected List<ProductDtos.ProductImageResponse> productImageListToProductImageResponseList(List<ProductImage> list) {
-        if ( list == null ) {
-            return null;
-        }
-
-        List<ProductDtos.ProductImageResponse> list1 = new ArrayList<ProductDtos.ProductImageResponse>( list.size() );
-        for ( ProductImage productImage : list ) {
-            list1.add( toImageResponse( productImage ) );
         }
 
         return list1;
