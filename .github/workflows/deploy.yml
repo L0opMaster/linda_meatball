@@ -114,6 +114,7 @@ jobs:
             MY_DB_NAME=${{secrets.MY_DB_NAME}}
             MY_DB_USERNAME=${{secrets.MY_DB_USERNAME}}
             MY_DB_PASSWORD=${{secrets.MY_DB_PASSWORD}}
+            JWT_SECRET=${{secrets.JWT_SECRET}}
             EOF
             
             rm -f docker-compose.dev.yml
