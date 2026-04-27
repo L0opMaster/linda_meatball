@@ -111,10 +111,11 @@ jobs:
             DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
             APP_NAME=${{ env.APP_NAME }}
             DB_URL=mysql-backend
-            MY_DB_NAME=${{secrets.MY_DB_NAME}}
-            MY_DB_USERNAME=${{secrets.MY_DB_USERNAME}}
-            MY_DB_PASSWORD=${{secrets.MY_DB_PASSWORD}}
-            JWT_SECRET=${{secrets.JWT_SECRET}}
+            MY_DB_NAME=${{ secrets.MY_DB_NAME }}
+            MY_DB_USERNAME=${{ secrets.MY_DB_USERNAME }}
+            MY_DB_PASSWORD=${{ secrets.MY_DB_PASSWORD }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}
             EOF
             
             rm -f docker-compose.dev.yml
