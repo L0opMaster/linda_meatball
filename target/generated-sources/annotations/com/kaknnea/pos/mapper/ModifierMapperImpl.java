@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-04-26T22:05:50+0700",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.18 (Ubuntu)"
+    date = "2026-04-27T16:26:53+0700",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.0.v20260407-0427, environment: Java 21.0.10 (Eclipse Adoptium)"
 )
 @Component
 public class ModifierMapperImpl implements ModifierMapper {
@@ -24,14 +24,14 @@ public class ModifierMapperImpl implements ModifierMapper {
 
         ModifierDtos.ModifierGroupResponse modifierGroupResponse = new ModifierDtos.ModifierGroupResponse();
 
-        modifierGroupResponse.setId( group.getId() );
-        modifierGroupResponse.setNameEn( group.getNameEn() );
-        modifierGroupResponse.setNameKm( group.getNameKm() );
-        modifierGroupResponse.setRequired( group.isRequired() );
-        modifierGroupResponse.setMultiSelect( group.isMultiSelect() );
         modifierGroupResponse.setActive( group.isActive() );
         modifierGroupResponse.setDisplayOrder( group.getDisplayOrder() );
+        modifierGroupResponse.setId( group.getId() );
+        modifierGroupResponse.setMultiSelect( group.isMultiSelect() );
+        modifierGroupResponse.setNameEn( group.getNameEn() );
+        modifierGroupResponse.setNameKm( group.getNameKm() );
         modifierGroupResponse.setOptions( modifierOptionListToModifierOptionResponseList( group.getOptions() ) );
+        modifierGroupResponse.setRequired( group.isRequired() );
 
         return modifierGroupResponse;
     }
@@ -44,12 +44,12 @@ public class ModifierMapperImpl implements ModifierMapper {
 
         ModifierDtos.ModifierOptionResponse modifierOptionResponse = new ModifierDtos.ModifierOptionResponse();
 
+        modifierOptionResponse.setActive( option.isActive() );
+        modifierOptionResponse.setDisplayOrder( option.getDisplayOrder() );
         modifierOptionResponse.setId( option.getId() );
         modifierOptionResponse.setNameEn( option.getNameEn() );
         modifierOptionResponse.setNameKm( option.getNameKm() );
         modifierOptionResponse.setPriceDelta( option.getPriceDelta() );
-        modifierOptionResponse.setActive( option.isActive() );
-        modifierOptionResponse.setDisplayOrder( option.getDisplayOrder() );
 
         return modifierOptionResponse;
     }
@@ -65,9 +65,9 @@ public class ModifierMapperImpl implements ModifierMapper {
         productModifiersResponse.setGroupId( group.getId() );
         productModifiersResponse.setGroupNameEn( group.getNameEn() );
         productModifiersResponse.setGroupNameKm( group.getNameKm() );
-        productModifiersResponse.setRequired( group.isRequired() );
         productModifiersResponse.setMultiSelect( group.isMultiSelect() );
         productModifiersResponse.setOptions( modifierOptionListToModifierOptionResponseList( group.getOptions() ) );
+        productModifiersResponse.setRequired( group.isRequired() );
 
         return productModifiersResponse;
     }
